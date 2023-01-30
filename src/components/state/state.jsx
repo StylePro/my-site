@@ -1,3 +1,5 @@
+import {rerenderEntireTree} from "../../index";
+
 const state = {
     dialogsPage: {
         dialogs: [
@@ -29,7 +31,14 @@ export const addPost = ()=> {
         message: state.profilePage.newPost,
         likesCount: 0,
     }
-    state.profilePage.posts.push(newPost)
+    state.profilePage.posts.push(newPost);
+    state.profilePage.newPost = '';
+    rerenderEntireTree(state);
+}
+
+export const updateNewPostText = (newText)=> {
+    state.profilePage.newPost = newText;
+    rerenderEntireTree(state);
 }
 
 export default state;
