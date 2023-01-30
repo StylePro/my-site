@@ -1,0 +1,25 @@
+const state = {
+    dialogsPage: {
+        dialogs: [
+            {id: 1, name: "Oleg"},
+            {id: 2, name: "Egor"},
+            {id: 3, name: "Marina"},
+            {id: 4, name: "Petya"},
+        ],
+        messages: [
+            {id: 1, message: "Hi"},
+            {id: 2, message: "Good"},
+            {id: 3, message: "How are you"},
+            {id: 4, message: "I love you"},
+        ]
+    },
+    profilePage: {
+        posts: [
+            {id: 1, message: 'Hi, how are you', likesCount: '56'},
+            {id: 2, message: "It's Ok", likesCount: '23'},
+            {id: 3, message: 'Welcome', likesCount: '45'},
+        ],
+    }
+}
+
+export default state;
