@@ -2,11 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import {BrowserRouter} from "react-router-dom";
-import state, {addPost, updateNewPostText} from "./components/state/state";
+import state, {addPost, subscribe, updateNewPostText} from "./components/state/state";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-export let rerenderEntireTree = () => {
+
+let rerenderEntireTree = (state) => {
     return (
         root.render(
             <React.StrictMode>
@@ -20,5 +21,6 @@ export let rerenderEntireTree = () => {
     )
 };
 
-rerenderEntireTree();
+rerenderEntireTree(state);
+subscribe(rerenderEntireTree);
 

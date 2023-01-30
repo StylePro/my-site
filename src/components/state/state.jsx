@@ -1,4 +1,7 @@
-import {rerenderEntireTree} from "../../index";
+let rerenderEntireTree = ()=> {
+    console.log('state changed')
+}
+
 
 const state = {
     dialogsPage: {
@@ -40,5 +43,12 @@ export const updateNewPostText = (newText)=> {
     state.profilePage.newPost = newText;
     rerenderEntireTree(state);
 }
+
+export const subscribe = (observer) => {
+        rerenderEntireTree = observer;
+}
+
+window.state = state;
+
 
 export default state;
