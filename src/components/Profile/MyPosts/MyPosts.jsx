@@ -3,13 +3,14 @@ import s from './MyPosts.module.css'
 import Post from "./Post/Post";
 
 const MyPosts = (props) => {
-
     const postElements = props.posts.map( p => <Post message = {p.message} likesCount = {p.likesCount}/>)
+
     const addPost = ()=> {
         props.addPost()
     }
 
     const onPostChange = (e)=> {
+        debugger;
         let text = e.target.value;
         props.updateNewPostText(text);
 

@@ -11,13 +11,28 @@ const Dialogs = (props) => {
     let messagesElements = props.state.messages
         .map (m => <Message message={m.message}/>)
 
+    let addMessage =()=> {
+        props.addMessage();
+    }
+
+    let updateMessage =(e)=> {
+        let text = e.target.value;
+        props.updateNewDialogsMessage(text)
+    }
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
                 {dialogElements}
             </div>
-            <div className={s.messages}>
-                {messagesElements}
+            <div>
+                <div className={s.messages}>
+                    {messagesElements}
+                </div>
+                <textarea onChange={updateMessage} value={props.state.newMessage}/>
+                <div>
+                    <button onClick={addMessage}>add message</button>
+                </div>
             </div>
         </div>
     )

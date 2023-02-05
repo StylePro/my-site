@@ -7,14 +7,16 @@ import store from "./components/state/state";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-let rerenderEntireTree = (state) => {
+const rerenderEntireTree = (state) => {
     return (
         root.render(
             <React.StrictMode>
                 <BrowserRouter>
                     <App state={state}
                          addPost={store.addPost.bind(store)}
-                         updateNewPostText={store.updateNewPostText.bind(store)}/>
+                         updateNewPostText={store.updateNewPostText.bind(store)}
+                         addMessage={store.addMessage.bind(store)}
+                         updateNewDialogsMessage={store.updateNewDialogsMessage.bind(store)}/>
                 </BrowserRouter>
             </React.StrictMode>
         )
