@@ -32,20 +32,8 @@ let store = {
     _callSubscriber() {
         console.log('state changed')
     },
-
-    addPost () {
-        debugger;
-        let newPost = {
-            id: Date.now(),
-            message: this._state.profilePage.newPost,
-            likesCount: 0,
-        }
-        this._state.profilePage.posts.push(newPost);
-        this._callSubscriber(this._state);
-    },
-    updateNewPostText (newText) {
-        this._state.profilePage.newPost = newText;
-        this._callSubscriber(this._state);
+    subscribe (observer) {
+        this._callSubscriber = observer;
     },
 
     addMessage () {
@@ -60,10 +48,20 @@ let store = {
         this._state.dialogsPage.newMessage = newText;
         this._callSubscriber(this._state);
     },
-
-    subscribe (observer) {
-        this._callSubscriber = observer;
-    },
+    dispatch (action) {
+        if (action.type === 'ADD-POST') {
+            let newPost = {
+                id: Date.now(),
+                message: this._state.profilePage.newPost,
+                likesCount: 0,
+            }
+            this._state.profilePage.posts.push(newPost);
+            this._callSubscriber(this._state);
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profilePage.newPost = action.newText;
+            this._callSubscriber(this._state);
+        }
+    }
 }
 export default store;
 window.state = store;
