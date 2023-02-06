@@ -36,18 +36,6 @@ let store = {
         this._callSubscriber = observer;
     },
 
-    addMessage () {
-        let newMessage = {
-            id: Date.now(),
-            message: this._state.dialogsPage.newMessage,
-        }
-        this._state.dialogsPage.messages.push(newMessage);
-        this._callSubscriber(this._state);
-    },
-    updateNewDialogsMessage (newText) {
-        this._state.dialogsPage.newMessage = newText;
-        this._callSubscriber(this._state);
-    },
     dispatch (action) {
         if (action.type === 'ADD-POST') {
             let newPost = {
@@ -56,9 +44,21 @@ let store = {
                 likesCount: 0,
             }
             this._state.profilePage.posts.push(newPost);
+            this._state.profilePage.newPost = '';
             this._callSubscriber(this._state);
         } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
             this._state.profilePage.newPost = action.newText;
+            this._callSubscriber(this._state);
+        } if (action.type === 'ADD-MESSAGE') {
+            let newMessage = {
+                id: Date.now(),
+                message: this._state.dialogsPage.newMessage,
+            }
+            this._state.dialogsPage.messages.push(newMessage);
+            this._state.dialogsPage.newMessage = '';
+            this._callSubscriber(this._state);
+        } else if (action.type === 'UPDATE-NEW-DIALOG-MESSAGE') {
+            this._state.dialogsPage.newMessage = action.newText;
             this._callSubscriber(this._state);
         }
     }

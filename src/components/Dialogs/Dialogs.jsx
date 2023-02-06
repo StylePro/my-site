@@ -12,12 +12,12 @@ const Dialogs = (props) => {
         .map (m => <Message message={m.message}/>)
 
     let addMessage =()=> {
-        props.addMessage();
+        props.dispatch({type: 'ADD-MESSAGE'});
     }
 
     let updateMessage =(e)=> {
         let text = e.target.value;
-        props.updateNewDialogsMessage(text)
+        props.dispatch({type: 'UPDATE-NEW-DIALOG-MESSAGE', newText: text})
     }
 
     return (
