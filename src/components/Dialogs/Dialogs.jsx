@@ -2,22 +2,25 @@ import React from "react";
 import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
+import {addMessageActionCreator, updateMessageActionCreator} from "../state/state";
+
+
 
 const Dialogs = (props) => {
 
     let dialogElements = props.state.dialogs
-        .map( d => <DialogItem name={d.name} id={d.id}/> )
+        .map(d => <DialogItem name={d.name} id={d.id}/>)
 
     let messagesElements = props.state.messages
-        .map (m => <Message message={m.message}/>)
+        .map(m => <Message message={m.message}/>)
 
-    let addMessage =()=> {
-        props.dispatch({type: 'ADD-MESSAGE'});
+    let addMessage = () => {
+        props.dispatch(addMessageActionCreator());
     }
 
-    let updateMessage =(e)=> {
+    let updateMessage = (e) => {
         let text = e.target.value;
-        props.dispatch({type: 'UPDATE-NEW-DIALOG-MESSAGE', newText: text})
+        props.dispatch(updateMessageActionCreator(text));
     }
 
     return (
