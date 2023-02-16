@@ -1,7 +1,8 @@
 import React from "react";
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {addPostActionCreator, onPostChangeActionCreator} from "../../state/state";
+import {addPostActionCreator, onPostChangeActionCreator} from "../../redux/profile-reducer";
+
 
 
 const MyPosts = (props) => {
@@ -22,7 +23,7 @@ const MyPosts = (props) => {
             My posts
             <div>
                 <div>
-                    <textarea onChange={onPostChange} value={props.newPost}/>
+                    <textarea onChange={onPostChange} value={props.newPost} placeholder='Enter your post'/>
                 </div>
                 <div>
                     <button onClick={addPost}>Add Post</button>
@@ -34,6 +35,5 @@ const MyPosts = (props) => {
         </div>
     )
 }
-
 
 export default MyPosts;
