@@ -10,24 +10,23 @@ let initialState = {
     ],
     newPost: 'I need send Message',
 };
-let dialogReducer = (state = initialState, action) => {
+let profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_POST:
-            let newPost = {
-                id: Date.now(),
-                message: state.newPost,
-                likesCount: 0,
+            return {
+                ...state,
+                posts: [...state.posts, {id: Date.now(), message: [...state.newPost], likesCount: 0,}],
+                newPost: ''
             }
-            state.posts.push(newPost);
-            state.newPost = '';
-            return state;
         case UPDATE_NEW_POST_TEXT:
-            state.newPost = action.newText;
-            return state;
+            return {
+                ...state,
+                newPost: action.newText
+            }
         default:
             return state;
     }
 }
 export const addPostActionCreator = ()=> ({type: ADD_POST});
 export const onPostChangeActionCreator = (text)=> ({type: UPDATE_NEW_POST_TEXT, newText: text})
-export default dialogReducer;
+export default profileReducer;
