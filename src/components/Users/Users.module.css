@@ -7,3 +7,12 @@
 .users {
     padding: 10px
 }
+
+.avatar img{
+    height: 50px;
+    width: 50px;
+}
+
+.selectedPages {
+    font-weight: bold;
+}
