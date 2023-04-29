@@ -3,14 +3,15 @@ import avatar from '../common/images/avatar.png'
 import s from './Users.module.css'
 
 let Users = (props) => {
-    debugger
     let countPage = Math.ceil(props.totalUsersCount / props.pageSize);
+    debugger
     let pages = [];
     for (let i = 1; i<= countPage; i++) {
         pages.push(i);
     }
     return (
         <div>
+            all pages: {props.totalUsersCount}
             <div>
                 {pages.map(p => {
                     return <span onClick={(event)=> {props.onPageChanged(p)}} className={props.currentPage === p && s.selectedPages}>{p}</span>

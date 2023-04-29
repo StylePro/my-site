@@ -16,3 +16,11 @@
 .selectedPages {
     font-weight: bold;
 }
+
+.preloader {
+    background-color: white;
+}
+.preloader img {
+    height: 100px;
+    width: 100px;
+}
