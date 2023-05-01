@@ -6,6 +6,7 @@ const ProfileInfo = (props) => {
     if (!props.profile) {
         return <Preloader/>
     }
+    debugger
     return (
         <div>
             <img src='https://img.fonwall.ru/o/2p/canada-moraine-lake-ozero-gory.jpg?route=mid&amp;h=750'/>

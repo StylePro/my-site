@@ -20,11 +20,11 @@ let Users = (props) => {
                 }
             </div>
             {props.users.map(u => <div key={u.id}>
+                <NavLink to={'/profile/' + u.id}>
                 <div className={s.avatar}>
-                   <NavLink to = {'/profile/' + u.id}>
                        <img src={u.photos.small != null ? u.photos.small : avatar}/>
-                   </NavLink>
                 </div>
+                </NavLink>
                 <div>
                     {u.name}
                 </div>
