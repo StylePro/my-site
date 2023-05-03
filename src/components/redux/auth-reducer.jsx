@@ -5,10 +5,6 @@ let initialState = {
     userId: null,
     login: null,
     email: null,
-    photos: {
-        small: null,
-        large: null
-    },
     isAuth: false
 
 };
