@@ -1,32 +1,32 @@
 import React from 'react'
 import {connect} from "react-redux";
 import Users from "./Users";
-import axios from "axios";
 import {
     follow,
     setCurrentPage, setIsFetching,
     setTotalUsersCount,
-    setUsers,
+    setUsers, toggleFollowingProgress,
     unfollow
 } from "../redux/users-reducer";
 import Preloader from "../common/Preloader/Preloader";
+import {UsersAPI as usersAPI} from "../api/api";
 
 class UsersContainer extends React.Component {
     componentDidMount() {
         this.props.setIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage} &count=${this.props.pageSize}`, {withCredentials: true}).then(responce => {
+        usersAPI.getUsers().then(data => {
             this.props.setIsFetching(false)
-            this.props.setUsers(responce.data.items)
-            this.props.setTotalUsersCount(responce.data.totalCount)
+            this.props.setUsers(data.items)
+            this.props.setTotalUsersCount(data.totalCount)
         })
     }
 
     onPageChanged = (pageNumber) => {
         this.props.setCurrentPage(pageNumber);
         this.props.setIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber} &count=${this.props.pageSize}`, {withCredentials: true}).then(responce => {
+        usersAPI.getUsers2(pageNumber).then(data => {
             this.props.setIsFetching(false)
-            this.props.setUsers(responce.data.items)
+            this.props.setUsers(data.items)
         })
     }
 
@@ -48,7 +48,8 @@ let mapStateToProps = (state) => {
         totalUsersCount: state.usersPage.totalUsersCount,
         unfollow: state.usersPage.unfollow,
         follow: state.usersPage.follow,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress,
     }
 }
 
@@ -59,4 +60,5 @@ export default connect(mapStateToProps, {
     unfollow,
     setCurrentPage,
     setIsFetching,
+    toggleFollowingProgress
 })(UsersContainer)
