@@ -2,17 +2,16 @@ import React from "react";
 import s from './Header.module.css'
 import {NavLink} from "react-router-dom";
 
-const Header = (props) => {
+const Header = (props)=> {
     return (
-        <header className={s.header}>
-            <img src='https://www.pngplay.com/wp-content/uploads/9/WWW-Website-Transparent-File.png'/>
-            <div className={s.authBlock}>
-                user: {props.isAuth
-                ? props.login
-                : <NavLink to path={'/auth'}>Login</NavLink>}
+        <div className={s.header}>
+            <img src = 'https://e7.pngegg.com/pngimages/660/974/png-clipart-logo-others-miscellaneous-3d-computer-graphics.png'/>
+            <div className={s.loginBlock}>
+                {props.isAuth
+                    ? props.login
+                : <NavLink to={'/login'}>Login</NavLink>}
             </div>
-        </header>
+        </div>
     )
 }
-
 export default Header;

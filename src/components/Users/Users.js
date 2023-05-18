@@ -12,6 +12,7 @@ let Users = (props) => {
             break
         }
     }
+
     return (
         <div>
             all users: {props.totalUsersCount}

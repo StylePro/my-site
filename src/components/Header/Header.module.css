@@ -1,11 +1,17 @@
 .header {
+    background-color: lemonchiffon;
     grid-area: h;
-    background-color: papayawhip;
-}
-.header img {
-    width: 80px;
 }
 
-.authBlock {
+.header img {
+    height: 50px;
+    border-radius: 50px;
+}
+
+.loginBlock {
     float: right;
+}
+
+.loginBlock a {
+    color: black;
 }
