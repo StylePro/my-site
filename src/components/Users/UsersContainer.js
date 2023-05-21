@@ -11,7 +11,8 @@ import {
     unfollowSuccess
 } from "../redux/users-reducer";
 import Preloader from "../common/Preloader/Preloader";
-import {Navigate} from "react-router-dom";
+import {withAuthNavigate} from "../hoc/withAuthNavigate";
+import {compose} from "redux";
 
 
 class UsersContainer extends React.Component {
@@ -25,9 +26,6 @@ class UsersContainer extends React.Component {
     }
 
     render() {
-        if (!this.props.isAuth) {
-            return <Navigate to={`/login`}/>
-        }
         return <>
             {this.props.isFetching
                 ? <Preloader/>
@@ -36,26 +34,28 @@ class UsersContainer extends React.Component {
         </>
     }
 }
-
-let mapStateToProps = (state) => {
-    return {
+let mapStateToProps = (state) => ({
         users: state.usersPage.users,
         currentPage: state.usersPage.currentPage,
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         isFetching: state.usersPage.isFetching,
         followingInProgress: state.usersPage.followingInProgress,
-        isAuth: state.auth.isAuth
-    }
-}
+        /*isAuth: state.auth.isAuth*/
+    })
 
-export default connect(mapStateToProps, {
-    setUsers,
-    followSuccess,
-    unfollowSuccess,
-    setCurrentPage,
-    toggleFollowingProgress,
-    getUsersData,
-    follow,
-    unfollow
-})(UsersContainer)
+
+
+export default compose(
+    connect(mapStateToProps, {
+        setUsers,
+        followSuccess,
+        unfollowSuccess,
+        setCurrentPage,
+        toggleFollowingProgress,
+        getUsersData,
+        follow,
+        unfollow
+    }),
+    withAuthNavigate
+)(UsersContainer)

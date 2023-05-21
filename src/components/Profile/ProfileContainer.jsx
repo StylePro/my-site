@@ -4,6 +4,8 @@ import {connect} from "react-redux";
 import {setUserProfile} from "../redux/profile-reducer";
 import {Navigate, useParams} from "react-router-dom";
 import {ProfileApi} from "../api/api";
+import {withAuthNavigate} from "../hoc/withAuthNavigate";
+import {compose} from "redux";
 
 function ProfileContainer(props) {
     let {userId} = useParams();
@@ -16,14 +18,15 @@ function ProfileContainer(props) {
         })
     }, [userId]);
 
-    if (!props.isAuth) {
-        return <Navigate to={`/login`}/>
-    }
     return <Profile profile = {props.profile}/>
 }
 
 let mapStateToProps = (state) => ({
     profile: state.profilePage.profile,
-    isAuth: state.auth.isAuth
+    /*isAuth: state.auth.isAuth*/
 })
-export default connect(mapStateToProps, {setUserProfile})(ProfileContainer)
+
+export default compose(
+    connect(mapStateToProps, {setUserProfile}),
+    withAuthNavigate,
+)(ProfileContainer)
