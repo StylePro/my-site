@@ -14,5 +14,3 @@ export const withAuthNavigate = (Component)=> {
     return ConnectedAuthRedirectComponent
 }
 
-/*
-ooo*/
